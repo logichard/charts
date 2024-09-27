@@ -713,6 +713,9 @@ Init container definition for waiting for the database to be ready
   {{- if .context.Values.waitContainer.containerSecurityContext.enabled }}
   securityContext: {{- include "common.compatibility.renderSecurityContext" (dict "secContext" .context.Values.waitContainer.containerSecurityContext "context" .context) | nindent 4 }}
   {{- end }}
+  {{- with .Values.waitContainer.resources }}
+  resources: {{- toYaml . | nindent 12 }}
+  {{- end }}
   command:
     - bash
     - -ec
